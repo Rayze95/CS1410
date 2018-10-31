@@ -125,4 +125,111 @@ public class BigRatTests
         BigRat r2 = r1.div(r1);
         assertEquals("1", r2.toString());
     }
+    
+    @Test
+    public void testBigAdd ()
+    {
+        BigRat r1 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        BigRat r2 = new BigRat(new BigInteger("5200000000000000000000000000000000000000"),
+                new BigInteger("10400000000000000000000000000000000000000"));
+        assertEquals("1", r1.add(r2).toString());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor4 ()
+    {
+        BigRat r1 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        assertEquals("1/2", r1.toString());
+
+        BigRat r2 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("90000000000000000000000000000000000000000000000000"));
+        assertEquals("1/3", r2.toString());
+
+        BigRat r3 = new BigRat(new BigInteger("120000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        assertEquals("2", r3.toString());
+
+        BigRat r4 = new BigRat(new BigInteger("60000000000000000000000000000000000000000000000000"),
+                new BigInteger("-80000000000000000000000000000000000000000000000000"));
+        assertEquals("-3/4", r4.toString());
+
+        BigRat r5 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("0"));
+    }
+    
+    @Test
+    public void testBigSub ()
+    {
+        BigRat r1 = new BigRat(new BigInteger("60000000000000000000000000000000000000000000000000"),
+                new BigInteger("-80000000000000000000000000000000000000000000000000"));
+        BigRat r2 = new BigRat(new BigInteger("120000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        assertEquals("-11/4", r1.sub(r2).toString());
+    }
+    
+    @Test
+    public void testBigMul ()
+    {
+        BigRat r1 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        BigRat r2 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        assertEquals("1/4", r1.mul(r2).toString());
+
+        r1 = new BigRat(new BigInteger("987876765674565435423544657879080989878678676"),
+                new BigInteger("89787676564654675786897988908987786785764654645675"));
+        r2 = new BigRat(new BigInteger("0"),
+                new BigInteger("89787676564654675786897988908987786785764654645675"));
+        assertEquals("0", r1.mul(r2).toString());
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testBigMul2 ()
+    {
+        BigRat r1 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        BigRat r2 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        assertEquals("1/4", r1.mul(r2).toString());
+
+        r1 = new BigRat(new BigInteger("987876765674565435423544657879080989878678676"),
+                new BigInteger("89787676564654675786897988908987786785764654645675"));
+        r2 = new BigRat(new BigInteger("987876765674565435423544657879080989878678676"),
+                new BigInteger("0"));
+        
+    }
+    
+    @Test
+    public void testBigDiv ()
+    {
+        BigRat r1 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        BigRat r2 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("120000000000000000000000000000000000000000000000000"));
+        assertEquals("2", r1.div(r2).toString());
+
+        r1 = new BigRat(new BigInteger("987876765674565435423544657879080989878678676"),
+                new BigInteger("89787676564654675786897988908987786785764654645675"));
+        r2 = new BigRat(new BigInteger("987876765674565435423544657879080989878678676"),
+                new BigInteger("89787676564654675786897988908987786785764654645675"));
+        assertEquals("1", r1.div(r2).toString());
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testBigDiv2 ()
+    {
+        BigRat r1 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        BigRat r2 = new BigRat(new BigInteger("30000000000000000000000000000000000000000000000000"),
+                new BigInteger("60000000000000000000000000000000000000000000000000"));
+        assertEquals("1", r1.div(r2).toString());
+
+        r1 = new BigRat(new BigInteger("987876765674565435423544657879080989878678676"),
+                new BigInteger("89787676564654675786897988908987786785764654645675"));
+        r2 = new BigRat(new BigInteger("987876765674565435423544657879080989878678676"),
+                new BigInteger("0"));
+        
+    }
 }
